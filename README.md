@@ -119,7 +119,7 @@ In VS Code, open a remote window (blue `><` button in the bottom left). Select `
 
 If you are extra and edited your hosts/config file, or once you have done the above once, simply select `Connect Current Window to Host...` and then select `kf` (or `isye-kfeighws` if you had VS Code create the host).
 
-You can then use VS Code like normal. Personally, I find VS Code to be a really convenient way to access Git, move files/folders, copy files to the remote server, and do other general development. You can also open terminal instances within VS Code. Pretty much everyone at GT uses VS Code connected to remote compute.
+You can now use VS Code like normal. Personally, I find VS Code to be a really convenient way to access Git, move files/folders, copy files to the remote server, and do other general development. You can also open terminal instances within VS Code. Pretty much everyone at GT uses VS Code connected to remote compute.
 
 ### How do I display UI windows?
 
