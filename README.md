@@ -173,9 +173,11 @@ The detached terminals will last until the machine is turned off (literally year
 
 Tmux might seem complex, but trust me, it is well worth the 3 minutes it takes to learn how to use it. Just follow the cheat sheet step-by-step and you will have the hang of it. Enjoy eternal peace. If you want to get fancy, you can split a tmux session into multiple terminals. Up to you, I usually only use the commands written in the cheat sheet.
 
-## How do I make my webserver publicly-assessible?
+## How do I make my webserver publicly-accessible?
 
-The ISYE IT folks set up `kfeighws` to have a public https port forwarded to port `8080`. This is really cool! It allows us to run a public facing webserver (and any number of internal ones), so you can host your project on `kfeigh` and access it by visiting the machine's IP address.
+_TL;DR: If you are the only one hosting, host on port 8080. Otherwise, have someone run the `server-relay.py` script to send your webservers traffic based on the traffic's route (e.g., `/onr-isr/log` traffic goes to the `onr-isr` server's `/log` route). Use the machine's IP address as the URL, traffic to the `https` port is converted to `http` by ISYE and forwarded to port `8080`._
+
+The ISYE IT folks set up `kfeighws` to have a public https port forwarded to port `8080`. This is really cool! It allows us to run a public facing webserver (and any number of internal ones), so you can host your project on `kfeighws` and access it by visiting the machine's IP address.
 
 To get the IP address, SSH into `kfeighws` and run `ifconfig`:
 
@@ -201,9 +203,33 @@ To test this out, you can use the super simple built-in netcat server:
 
 When you visit `https://190.201.92.80`, you will see `Hiiii!!`. Netcat will then exit. You can run the command again if you want. If you are interested in running a webserver for your project, I once hosted an _Intro to Python Webservers_ workshop and the slides are [here](https://kolb.dev/flask).
 
-To have multiple webservers running, either ask ISYE IT to open another http port (like 8081), or set up a main webserver to reroute requests by the page they access (e.g., have `190.201.92.80/onr-isr` route to one webserver listening on port 5000, and `190.201.92.80/tmm-mas` route to another listening on port 5001). I recommend the later so there are fewer exceptions made to ISYE's firewall. You use [https://github.com/gt-cec/kfeighws-tutorial/server-relay.py](this Python script) to handle this, just one person running it in tmux and edit the script as needed.
-```
+To have multiple webservers running, either ask ISYE IT to open another http port (like 8081), or set up a main webserver to reroute requests by the page the user accesses (e.g., have `/onr-isr` route to one webserver listening on port 5000, and `/tmm-mas` route to another listening on port 5001). I recommend the later so there are fewer exceptions made to ISYE's firewall. Use [this Python script](https://github.com/gt-cec/kfeighws-tutorial/server-relay.py) to handle this forwarding, just have one person running it via tmux and edit/re-run the script as needed to add more servers. As a test example, if you run the script and visit `https://IP_ADDRESS/cec` you should see the CEC homepage.
+
+## I don't have sudo access, how do I install things? I can't even use pip!
+
+_TL;DR: Use Mamba (replacement to Conda) environments. I have yet to run into any issues with not having sudo while using Mamba._
+
+Back in the day we used Docker (hard to use, bloated, slow), then we used Conda (easy to use, less bloated, slow), now we use Mamba (easy to use, thin, fast).
+
+Mamba is a package manager that is the spiritual successor to Conda. It allows you to install packages locally so you don't need sudo access, and manages versions so you don't need to worry about conflicting packages. My most common need we have for Mamba is to use a more recent version of Python, as RHEL uses the (outdated) Python 3.9 as of this writing, and to install Python packages through `pip` (which usually requires sudo access). Virtually everything else you would want to install is available from the package repository `conda-forge`, which is entirely compatible with Mamba.
+
+Install Micromamba from [here](https://mamba.readthedocs.io), it's a simple copy/paste terminal command that will not require sudo. For the work we do, we don't need the full Mamba. You may need to run `source ~/.bashrc` to start Mamba, you will see `(base)` at the start of your terminal when it is running.
+
+You can look at the Mamba documentation for how to use Mamba, here is a quick cheat sheet:
+
+* Create a new environment:
+`micromamba create -n new_env -c conda-forge`
+* Activate the new environment:
+`micromamba activate new_env`
+* Install some packages in new_env:
+`micromamba install python=3.12`
+* Install some Python libraries in new_env:
+`pip install matplotlib numpy flask`
+* Deactivate the current environment
+`micromamba deactivate`
+
+Just like that, you are able to install whatever you would like without worrying about version conflicts with other projects. Each environment is independent, however the packages are linked, so if you install the same `matplotlib` version in two environments it will only install it once on your system.
 
 ## Conclusion
 
-And that's all! Please update this guide as new information emerges, and reach out if you have any questions about anything covered in the guide.
+That's all! Please update this guide as things change, and reach out if you have any questions about anything covered in the guide.
