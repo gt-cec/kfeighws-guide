@@ -9,6 +9,11 @@ def onr_isr(subpath):
     port = 5000
     return relay_request(f"http://localhost:{port}/{subpath}")
 
+# example route for cec traffic
+@app.route('/cec', methods=["GET", "POST"])
+def cec(subpath):
+    return relay_request(f"https://cec.gatech.edu")
+
 # simple proxy: relays the request and returns the response
 def relay_request(url, request):
     try:
