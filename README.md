@@ -211,7 +211,7 @@ _TL;DR: Use Mamba (replacement to Conda) environments. I have yet to run into an
 
 Back in the day we used Docker (hard to use, bloated, slow), then we used Conda (easy to use, less bloated, slow), now we use Mamba (easy to use, thin, fast).
 
-Mamba is a package manager that is the spiritual successor to Conda. It allows you to install packages locally so you don't need sudo access, and manages versions so you don't need to worry about conflicting packages. My most common need we have for Mamba is to use a more recent version of Python, as RHEL uses the (outdated) Python 3.9 as of this writing, and to install Python packages through `pip` (which usually requires sudo access). Virtually everything else you would want to install is available from the package repository `conda-forge`, which is entirely compatible with Mamba.
+Mamba is a package manager that is the spiritual successor to Conda. It allows you to install packages locally so you don't need sudo access, and manages environments so you don't need to worry about conflicting package requirements. My most common need we have for Mamba is to use a more recent version of Python, as RHEL uses the (outdated) Python 3.9 as of this writing, and to install Python packages through `pip` (which usually requires sudo access). Virtually everything else you would want to install is available from the package repository `conda-forge`, which is entirely compatible with Mamba.
 
 Install Micromamba from [here](https://mamba.readthedocs.io), it's a simple copy/paste terminal command that will not require sudo. For the work we do, we don't need the full Mamba. You may need to run `source ~/.bashrc` to start Mamba, you will see `(base)` at the start of your terminal when it is running.
 
