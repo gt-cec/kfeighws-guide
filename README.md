@@ -232,4 +232,4 @@ Just like that, you are able to install whatever you would like without worrying
 
 ## Conclusion
 
-That's all! Please update this guide as things change, and reach out if you have any questions about anything covered in the guide.
+That's all! Please update this guide as things change, and reach out if you have any questions about anything covered in the guide. We dropped a lot of money on this computer, so make the most of it :)
