@@ -115,7 +115,7 @@ Beautiful.
 
 Most of us work through a text editor, and most text editors support remote access. VS Code is probably what you use (or, at least, _should_ use). VS Code uses the hosts file, if you did not edit that file (see Jack's Wisdom) then VS Code will do it automatically.
 
-In VS Code, open a remote window (blue `><` button in the bottom left). Select `Connect Current Window to Host...`, then `+ Add New SSH Host...`. Enter your SSH command (`ssh isye-kfeighws` or the one-liner in Jack's Wisdom). You will then be prompted to select where to save the new host configuration, I typically choose one that doesn't look like it requires administrator rights (so, in your user directory). VS Code will open that file and you can change the host name from VS Code's default if you want to (`isye-kfeighws`).
+In VS Code, open a remote window (blue `><` button in the bottom left). Select `Connect Current Window to Host...`, then `+ Add New SSH Host...`. Enter your SSH command (`ssh isye-kfeighws` or the one-liner from the previous section). You will then be prompted to select where to save the new host configuration, I typically choose one that doesn't look like it requires administrator rights (so, in your user directory). VS Code will open that file and you can change the host name from VS Code's default if you want to (`isye-kfeighws`).
 
 If you are extra and edited your hosts/config file, or once you have done the above once, simply select `Connect Current Window to Host...` and then select `kf` (or `isye-kfeighws` if you had VS Code create the host).
 
